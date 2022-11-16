@@ -1,0 +1,458 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+                <link href="lib/tom-select/tom-select.css" rel="stylesheet">
+                <script src="lib/tom-select/tom-select.complete.min.js"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 550px;
+                 background-color: eeeeee;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="Mia Mottley">Mia Mottley</option>
+                                
+                                    <option value="Volodymyr Zelensky">Volodymyr Zelensky</option>
+                                
+                                    <option value="Xi Jinping">Xi Jinping</option>
+                                
+                                    <option value="Ursula von der Leyen">Ursula von der Leyen</option>
+                                
+                                    <option value="Ron DeSantis">Ron DeSantis</option>
+                                
+                                    <option value="Joe Biden">Joe Biden</option>
+                                
+                                    <option value="Yoon Suk-yeol">Yoon Suk-yeol</option>
+                                
+                                    <option value="Vladimir Putin">Vladimir Putin</option>
+                                
+                                    <option value="Olaf Scholz">Olaf Scholz</option>
+                                
+                                    <option value="Samia Suluhu Hassan">Samia Suluhu Hassan</option>
+                                
+                                    <option value="Kevin McCarthy">Kevin McCarthy</option>
+                                
+                                    <option value="Abiy Ahmed">Abiy Ahmed</option>
+                                
+                                    <option value="Kyrsten Sinema">Kyrsten Sinema</option>
+                                
+                                    <option value="Gabriel Boric">Gabriel Boric</option>
+                                
+                                    <option value="Sun Chunlan">Sun Chunlan</option>
+                                
+                                    <option value="Christine Lagarde">Christine Lagarde</option>
+                                
+                                    <option value="Valeriy Zaluzhnyy">Valeriy Zaluzhnyy</option>
+                                
+                                    <option value="Sevgil Musaieva">Sevgil Musaieva</option>
+                                
+                                    <option value="Ketanji Brown Jackson">Ketanji Brown Jackson</option>
+                                
+                                    <option value="Joe Rogan">Joe Rogan</option>
+                                
+                                    <option value="Karuna Nundy">Karuna Nundy</option>
+                                
+                                    <option value="Letitia James">Letitia James</option>
+                                
+                                    <option value="Lynn Fitch">Lynn Fitch</option>
+                                
+                                    <option value="Umar Ata Bandial">Umar Ata Bandial</option>
+                                
+                                    <option value="Zendaya">Zendaya</option>
+                                
+                                    <option value="Miranda Lambert">Miranda Lambert</option>
+                                
+                                    <option value="Timnit Gebru">Timnit Gebru</option>
+                                
+                                    <option value="Tim Cook">Tim Cook</option>
+                                
+                                    <option value="Oprah Winfrey">Oprah Winfrey</option>
+                                
+                                    <option value="Kris Jenner">Kris Jenner</option>
+                                
+                                    <option value="Andy Jassy">Andy Jassy</option>
+                                
+                                    <option value="Sam Bankman-Fried">Sam Bankman-Fried</option>
+                                
+                                    <option value="Elizabeth Alexander">Elizabeth Alexander</option>
+                                
+                                    <option value="David Zaslav">David Zaslav</option>
+                                
+                                    <option value="Michelle Zauner">Michelle Zauner</option>
+                                
+                                    <option value="Hwang Dong-hyuk">Hwang Dong-hyuk</option>
+                                
+                                    <option value="Bela Bajaria">Bela Bajaria</option>
+                                
+                                    <option value="Gautam Adani">Gautam Adani</option>
+                                
+                                    <option value="Michelle Yeoh">Michelle Yeoh</option>
+                                
+                                    <option value="Taika Waititi">Taika Waititi</option>
+                                
+                                    <option value="Josh Wardle">Josh Wardle</option>
+                                
+                                    <option value="Mike Cannon-Brookes">Mike Cannon-Brookes</option>
+                                
+                                    <option value="David Vélez">David Vélez</option>
+                                
+                                    <option value="Sally Rooney">Sally Rooney</option>
+                                
+                                    <option value="Khurram Parvez">Khurram Parvez</option>
+                                
+                                    <option value="Demna Gvasalia">Demna Gvasalia</option>
+                                
+                                    <option value="Francis Kéré">Francis Kéré</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+              <div id="filter-menu" class="card-header">
+                <div class="row no-gutters">
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'item')"
+                            id="select-item"
+                        >
+                        <option value="">Select a network item</option>
+                        <option value="edge">edge</option>
+                        <option value="node">node</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'property')"
+                            id="select-property"
+                        >
+                        <option value="">Select a property...</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            id="select-value"
+                        >
+                        <option value="">Select value(s)...</option>
+                    </select>
+                  </div>
+                  <div class="col-1 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="highlightFilter(filter);">Filter</button>
+                  </div>
+                  <div class="col-2 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="clearFilter(true)">Reset Selection</button>
+                  </div>
+                </div>
+              </div>
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+                  // explicitly using onItemAdd and this function as we need to save multiple values
+                  let updateValueFilter = function() {
+                      return function () {
+                      filter['value'].push(arguments[0])
+                      }
+                  }
+
+                  let valueControl = new TomSelect("#select-value",{
+                      maxItems: null,
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: updateValueFilter()
+                  });
+
+                  let addValues = function() {
+                      return function () {
+                          // clear the current value options and add the selected attribute values
+                          // tom-select handles duplicates
+                          let selectedProperty = arguments[0];
+                          valueControl.clear();
+                          valueControl.clearOptions();
+                          filter['value'] = []
+                          if (filter['item'] === 'node') {
+                              for (let each in allNodes) {
+                                  valueControl.addOption({
+                                      id:allNodes[each][selectedProperty],
+                                      title:allNodes[each][selectedProperty]
+                                  })
+                              }
+                          }
+                          else if (filter['item'] === 'edge') {
+                              for (let each in allEdges) {
+                                  valueControl.addOption({
+                                      id:allEdges[each][selectedProperty],
+                                      title:allEdges[each][selectedProperty]
+                                  })
+                              }
+                          }
+                      }
+                  };
+
+                  let propControl = new TomSelect("#select-property",{
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addValues()
+                  });
+
+                  let addProperties = function() {
+                      return function () {
+                          // loops through the selected network item and adds the attributes to dropdown
+                          // tom-select handles duplicates
+                          clearFilter(false)
+                          if (arguments[0] === 'edge') {
+                              for (let each in allEdges) {
+                                  if (allEdges.hasOwnProperty(each)) {
+                                      for (let eachProp in allEdges[each]) {
+                                          if (allEdges[each].hasOwnProperty(eachProp)) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                          else if (arguments[0] === 'node') {
+                              for (let each in allNodes) {
+                                  if (allNodes.hasOwnProperty(each)) {
+                                      for (let eachProp in allNodes[each]) {
+                                          if (allNodes[each].hasOwnProperty(eachProp)
+                                              && (eachProp !== 'hidden' && eachProp !== 'savedLabel'
+                                                  && eachProp !== 'hiddenLabel')) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  };
+
+                  let itemControl = new TomSelect("#select-item",{
+                      create: false,
+                      sortField:{
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addProperties()
+                  });
+
+                  function clearFilter(reset) {
+                      // utility function to clear all the selected filter options
+                      // if reset is set to true, the existing filter will be removed
+                      // else, only the dropdown options are cleared
+                      propControl.clear();
+                      propControl.clearOptions();
+                      valueControl.clear();
+                      valueControl.clearOptions();
+                      filter = {
+                          item : '',
+                          property : '',
+                          value : []
+                      }
+                      if (reset) {
+                          itemControl.clear();
+                          filterHighlight({nodes: []})
+                      }
+                  }
+
+                  function updateFilter(value, key) {
+                      // key could be 'item' or 'property' and value is as selected in dropdown
+                      filter[key] = value
+                  }
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "red", "font": {"color": "black"}, "id": "Mia Mottley", "label": "Mia Mottley", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Volodymyr Zelensky", "label": "Volodymyr Zelensky", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Xi Jinping", "label": "Xi Jinping", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Ursula von der Leyen", "label": "Ursula von der Leyen", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Ron DeSantis", "label": "Ron DeSantis", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Joe Biden", "label": "Joe Biden", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Yoon Suk-yeol", "label": "Yoon Suk-yeol", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Vladimir Putin", "label": "Vladimir Putin", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Olaf Scholz", "label": "Olaf Scholz", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Samia Suluhu Hassan", "label": "Samia Suluhu Hassan", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Kevin McCarthy", "label": "Kevin McCarthy", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Abiy Ahmed", "label": "Abiy Ahmed", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Kyrsten Sinema", "label": "Kyrsten Sinema", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Gabriel Boric", "label": "Gabriel Boric", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Sun Chunlan", "label": "Sun Chunlan", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "red", "font": {"color": "black"}, "id": "Christine Lagarde", "label": "Christine Lagarde", "shape": "dot", "size": 10, "zawod": "Polityka"}, {"color": "darkgreen", "font": {"color": "black"}, "id": "Valeriy Zaluzhnyy", "label": "Valeriy Zaluzhnyy", "shape": "dot", "size": 10, "zawod": "Wojsko"}, {"color": "blue", "font": {"color": "black"}, "id": "Sevgil Musaieva", "label": "Sevgil Musaieva", "shape": "dot", "size": 10, "zawod": "Dziennikarstwo"}, {"color": "yellow", "font": {"color": "black"}, "id": "Ketanji Brown Jackson", "label": "Ketanji Brown Jackson", "shape": "dot", "size": 10, "zawod": "S\u0105downictwo"}, {"color": "blue", "font": {"color": "black"}, "id": "Joe Rogan", "label": "Joe Rogan", "shape": "dot", "size": 10, "zawod": "Dziennikarstwo"}, {"color": "yellow", "font": {"color": "black"}, "id": "Karuna Nundy", "label": "Karuna Nundy", "shape": "dot", "size": 10, "zawod": "S\u0105downictwo"}, {"color": "yellow", "font": {"color": "black"}, "id": "Letitia James", "label": "Letitia James", "shape": "dot", "size": 10, "zawod": "S\u0105downictwo"}, {"color": "yellow", "font": {"color": "black"}, "id": "Lynn Fitch", "label": "Lynn Fitch", "shape": "dot", "size": 10, "zawod": "S\u0105downictwo"}, {"color": "yellow", "font": {"color": "black"}, "id": "Umar Ata Bandial", "label": "Umar Ata Bandial", "shape": "dot", "size": 10, "zawod": "S\u0105downictwo"}, {"color": "orange", "font": {"color": "black"}, "id": "Zendaya", "label": "Zendaya", "shape": "dot", "size": 10, "zawod": "Aktorstwo"}, {"color": "lightblue", "font": {"color": "black"}, "id": "Miranda Lambert", "label": "Miranda Lambert", "shape": "dot", "size": 10, "zawod": "Muzyka"}, {"color": "purple", "font": {"color": "black"}, "id": "Timnit Gebru", "label": "Timnit Gebru", "shape": "dot", "size": 10, "zawod": "CEO"}, {"color": "lightgrey", "font": {"color": "black"}, "id": "Tim Cook", "label": "Tim Cook", "shape": "dot", "size": 10, "zawod": "Informatyka"}, {"color": "darkred", "font": {"color": "black"}, "id": "Oprah Winfrey", "label": "Oprah Winfrey", "shape": "dot", "size": 10, "zawod": "Prezenterka"}, {"color": "lightpink", "font": {"color": "black"}, "id": "Kris Jenner", "label": "Kris Jenner", "shape": "dot", "size": 10, "zawod": "Celebrytka"}, {"color": "purple", "font": {"color": "black"}, "id": "Andy Jassy", "label": "Andy Jassy", "shape": "dot", "size": 10, "zawod": "CEO"}, {"color": "purple", "font": {"color": "black"}, "id": "Sam Bankman-Fried", "label": "Sam Bankman-Fried", "shape": "dot", "size": 10, "zawod": "CEO"}, {"color": "grey", "font": {"color": "black"}, "id": "Elizabeth Alexander", "label": "Elizabeth Alexander", "shape": "dot", "size": 10, "zawod": "Literatura"}, {"color": "purple", "font": {"color": "black"}, "id": "David Zaslav", "label": "David Zaslav", "shape": "dot", "size": 10, "zawod": "CEO"}, {"color": "lightblue", "font": {"color": "black"}, "id": "Michelle Zauner", "label": "Michelle Zauner", "shape": "dot", "size": 10, "zawod": "Muzyka"}, {"color": "darkbrown", "font": {"color": "black"}, "id": "Hwang Dong-hyuk", "label": "Hwang Dong-hyuk", "shape": "dot", "size": 10, "zawod": "Re\u017cyseria"}, {"color": "purple", "font": {"color": "black"}, "id": "Bela Bajaria", "label": "Bela Bajaria", "shape": "dot", "size": 10, "zawod": "CEO"}, {"color": "purple", "font": {"color": "black"}, "id": "Gautam Adani", "label": "Gautam Adani", "shape": "dot", "size": 10, "zawod": "CEO"}, {"color": "orange", "font": {"color": "black"}, "id": "Michelle Yeoh", "label": "Michelle Yeoh", "shape": "dot", "size": 10, "zawod": "Aktorstwo"}, {"color": "darkbrown", "font": {"color": "black"}, "id": "Taika Waititi", "label": "Taika Waititi", "shape": "dot", "size": 10, "zawod": "Re\u017cyseria"}, {"color": "purple", "font": {"color": "black"}, "id": "Josh Wardle", "label": "Josh Wardle", "shape": "dot", "size": 10, "zawod": "CEO"}, {"color": "purple", "font": {"color": "black"}, "id": "Mike Cannon-Brookes", "label": "Mike Cannon-Brookes", "shape": "dot", "size": 10, "zawod": "CEO"}, {"color": "purple", "font": {"color": "black"}, "id": "David V\u00e9lez", "label": "David V\u00e9lez", "shape": "dot", "size": 10, "zawod": "CEO"}, {"color": "grey", "font": {"color": "black"}, "id": "Sally Rooney", "label": "Sally Rooney", "shape": "dot", "size": 10, "zawod": "Literatura"}, {"color": "pink", "font": {"color": "black"}, "id": "Khurram Parvez", "label": "Khurram Parvez", "shape": "dot", "size": 10, "zawod": "Dzia\u0142alno\u015b\u0107 spo\u0142eczna"}, {"color": "darkyellow", "font": {"color": "black"}, "id": "Demna Gvasalia", "label": "Demna Gvasalia", "shape": "dot", "size": 10, "zawod": "Moda"}, {"color": "brown", "font": {"color": "black"}, "id": "Francis K\u00e9r\u00e9", "label": "Francis K\u00e9r\u00e9", "shape": "dot", "size": 10, "zawod": "Architekt"}]);
+                  edges = new vis.DataSet([{"from": "Mia Mottley", "to": "Volodymyr Zelensky", "width": 1}, {"from": "Mia Mottley", "to": "Xi Jinping", "width": 1}, {"from": "Mia Mottley", "to": "Ursula von der Leyen", "width": 1}, {"from": "Mia Mottley", "to": "Ron DeSantis", "width": 1}, {"from": "Mia Mottley", "to": "Joe Biden", "width": 1}, {"from": "Mia Mottley", "to": "Yoon Suk-yeol", "width": 1}, {"from": "Mia Mottley", "to": "Vladimir Putin", "width": 1}, {"from": "Mia Mottley", "to": "Olaf Scholz", "width": 1}, {"from": "Mia Mottley", "to": "Samia Suluhu Hassan", "width": 1}, {"from": "Mia Mottley", "to": "Kevin McCarthy", "width": 1}, {"from": "Mia Mottley", "to": "Abiy Ahmed", "width": 1}, {"from": "Mia Mottley", "to": "Kyrsten Sinema", "width": 1}, {"from": "Mia Mottley", "to": "Gabriel Boric", "width": 1}, {"from": "Mia Mottley", "to": "Sun Chunlan", "width": 1}, {"from": "Mia Mottley", "to": "Christine Lagarde", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Xi Jinping", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Ursula von der Leyen", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Ron DeSantis", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Joe Biden", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Yoon Suk-yeol", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Vladimir Putin", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Olaf Scholz", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Samia Suluhu Hassan", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Kevin McCarthy", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Abiy Ahmed", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Kyrsten Sinema", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Gabriel Boric", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Valeriy Zaluzhnyy", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Sun Chunlan", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Sevgil Musaieva", "width": 1}, {"from": "Volodymyr Zelensky", "to": "Christine Lagarde", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Joe Rogan", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Ron DeSantis", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Joe Biden", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Kevin McCarthy", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Karuna Nundy", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Kyrsten Sinema", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Letitia James", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Lynn Fitch", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Umar Ata Bandial", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Zendaya", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Miranda Lambert", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Timnit Gebru", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Tim Cook", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Oprah Winfrey", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Kris Jenner", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Andy Jassy", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "Elizabeth Alexander", "width": 1}, {"from": "Ketanji Brown Jackson", "to": "David Zaslav", "width": 1}, {"from": "Joe Rogan", "to": "Ron DeSantis", "width": 1}, {"from": "Joe Rogan", "to": "Joe Biden", "width": 1}, {"from": "Joe Rogan", "to": "Kevin McCarthy", "width": 1}, {"from": "Joe Rogan", "to": "Kyrsten Sinema", "width": 1}, {"from": "Joe Rogan", "to": "Letitia James", "width": 1}, {"from": "Joe Rogan", "to": "Lynn Fitch", "width": 1}, {"from": "Joe Rogan", "to": "Zendaya", "width": 1}, {"from": "Joe Rogan", "to": "Miranda Lambert", "width": 1}, {"from": "Joe Rogan", "to": "Timnit Gebru", "width": 1}, {"from": "Joe Rogan", "to": "Sevgil Musaieva", "width": 1}, {"from": "Joe Rogan", "to": "Tim Cook", "width": 1}, {"from": "Joe Rogan", "to": "Oprah Winfrey", "width": 1}, {"from": "Joe Rogan", "to": "Kris Jenner", "width": 1}, {"from": "Joe Rogan", "to": "Andy Jassy", "width": 1}, {"from": "Joe Rogan", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Joe Rogan", "to": "Elizabeth Alexander", "width": 1}, {"from": "Joe Rogan", "to": "David Zaslav", "width": 1}, {"from": "Xi Jinping", "to": "Ursula von der Leyen", "width": 1}, {"from": "Xi Jinping", "to": "Ron DeSantis", "width": 1}, {"from": "Xi Jinping", "to": "Joe Biden", "width": 1}, {"from": "Xi Jinping", "to": "Yoon Suk-yeol", "width": 1}, {"from": "Xi Jinping", "to": "Vladimir Putin", "width": 1}, {"from": "Xi Jinping", "to": "Olaf Scholz", "width": 1}, {"from": "Xi Jinping", "to": "Samia Suluhu Hassan", "width": 1}, {"from": "Xi Jinping", "to": "Kevin McCarthy", "width": 1}, {"from": "Xi Jinping", "to": "Abiy Ahmed", "width": 1}, {"from": "Xi Jinping", "to": "Kyrsten Sinema", "width": 1}, {"from": "Xi Jinping", "to": "Gabriel Boric", "width": 1}, {"from": "Xi Jinping", "to": "Sun Chunlan", "width": 1}, {"from": "Xi Jinping", "to": "Christine Lagarde", "width": 1}, {"from": "Ursula von der Leyen", "to": "Ron DeSantis", "width": 1}, {"from": "Ursula von der Leyen", "to": "Joe Biden", "width": 1}, {"from": "Ursula von der Leyen", "to": "Yoon Suk-yeol", "width": 1}, {"from": "Ursula von der Leyen", "to": "Vladimir Putin", "width": 1}, {"from": "Ursula von der Leyen", "to": "Olaf Scholz", "width": 1}, {"from": "Ursula von der Leyen", "to": "Samia Suluhu Hassan", "width": 1}, {"from": "Ursula von der Leyen", "to": "Kevin McCarthy", "width": 1}, {"from": "Ursula von der Leyen", "to": "Abiy Ahmed", "width": 1}, {"from": "Ursula von der Leyen", "to": "Kyrsten Sinema", "width": 1}, {"from": "Ursula von der Leyen", "to": "Gabriel Boric", "width": 1}, {"from": "Ursula von der Leyen", "to": "Sun Chunlan", "width": 1}, {"from": "Ursula von der Leyen", "to": "Christine Lagarde", "width": 1}, {"from": "Ron DeSantis", "to": "Joe Biden", "width": 1}, {"from": "Ron DeSantis", "to": "Yoon Suk-yeol", "width": 1}, {"from": "Ron DeSantis", "to": "Vladimir Putin", "width": 1}, {"from": "Ron DeSantis", "to": "Olaf Scholz", "width": 1}, {"from": "Ron DeSantis", "to": "Samia Suluhu Hassan", "width": 1}, {"from": "Ron DeSantis", "to": "Kevin McCarthy", "width": 1}, {"from": "Ron DeSantis", "to": "Abiy Ahmed", "width": 1}, {"from": "Ron DeSantis", "to": "Kyrsten Sinema", "width": 1}, {"from": "Ron DeSantis", "to": "Gabriel Boric", "width": 1}, {"from": "Ron DeSantis", "to": "Letitia James", "width": 1}, {"from": "Ron DeSantis", "to": "Lynn Fitch", "width": 1}, {"from": "Ron DeSantis", "to": "Sun Chunlan", "width": 1}, {"from": "Ron DeSantis", "to": "Zendaya", "width": 1}, {"from": "Ron DeSantis", "to": "Miranda Lambert", "width": 1}, {"from": "Ron DeSantis", "to": "Timnit Gebru", "width": 1}, {"from": "Ron DeSantis", "to": "Tim Cook", "width": 1}, {"from": "Ron DeSantis", "to": "Oprah Winfrey", "width": 1}, {"from": "Ron DeSantis", "to": "Christine Lagarde", "width": 1}, {"from": "Ron DeSantis", "to": "Kris Jenner", "width": 1}, {"from": "Ron DeSantis", "to": "Andy Jassy", "width": 1}, {"from": "Ron DeSantis", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Ron DeSantis", "to": "Elizabeth Alexander", "width": 1}, {"from": "Ron DeSantis", "to": "David Zaslav", "width": 1}, {"from": "Joe Biden", "to": "Yoon Suk-yeol", "width": 1}, {"from": "Joe Biden", "to": "Vladimir Putin", "width": 1}, {"from": "Joe Biden", "to": "Olaf Scholz", "width": 1}, {"from": "Joe Biden", "to": "Samia Suluhu Hassan", "width": 1}, {"from": "Joe Biden", "to": "Kevin McCarthy", "width": 1}, {"from": "Joe Biden", "to": "Abiy Ahmed", "width": 1}, {"from": "Joe Biden", "to": "Kyrsten Sinema", "width": 1}, {"from": "Joe Biden", "to": "Gabriel Boric", "width": 1}, {"from": "Joe Biden", "to": "Letitia James", "width": 1}, {"from": "Joe Biden", "to": "Lynn Fitch", "width": 1}, {"from": "Joe Biden", "to": "Sun Chunlan", "width": 1}, {"from": "Joe Biden", "to": "Zendaya", "width": 1}, {"from": "Joe Biden", "to": "Miranda Lambert", "width": 1}, {"from": "Joe Biden", "to": "Timnit Gebru", "width": 1}, {"from": "Joe Biden", "to": "Tim Cook", "width": 1}, {"from": "Joe Biden", "to": "Oprah Winfrey", "width": 1}, {"from": "Joe Biden", "to": "Christine Lagarde", "width": 1}, {"from": "Joe Biden", "to": "Kris Jenner", "width": 1}, {"from": "Joe Biden", "to": "Andy Jassy", "width": 1}, {"from": "Joe Biden", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Joe Biden", "to": "Elizabeth Alexander", "width": 1}, {"from": "Joe Biden", "to": "David Zaslav", "width": 1}, {"from": "Yoon Suk-yeol", "to": "Vladimir Putin", "width": 1}, {"from": "Yoon Suk-yeol", "to": "Olaf Scholz", "width": 1}, {"from": "Yoon Suk-yeol", "to": "Samia Suluhu Hassan", "width": 1}, {"from": "Yoon Suk-yeol", "to": "Kevin McCarthy", "width": 1}, {"from": "Yoon Suk-yeol", "to": "Abiy Ahmed", "width": 1}, {"from": "Yoon Suk-yeol", "to": "Kyrsten Sinema", "width": 1}, {"from": "Yoon Suk-yeol", "to": "Gabriel Boric", "width": 1}, {"from": "Yoon Suk-yeol", "to": "Sun Chunlan", "width": 1}, {"from": "Yoon Suk-yeol", "to": "Michelle Zauner", "width": 1}, {"from": "Yoon Suk-yeol", "to": "Christine Lagarde", "width": 1}, {"from": "Yoon Suk-yeol", "to": "Hwang Dong-hyuk", "width": 1}, {"from": "Vladimir Putin", "to": "Olaf Scholz", "width": 1}, {"from": "Vladimir Putin", "to": "Samia Suluhu Hassan", "width": 1}, {"from": "Vladimir Putin", "to": "Kevin McCarthy", "width": 1}, {"from": "Vladimir Putin", "to": "Abiy Ahmed", "width": 1}, {"from": "Vladimir Putin", "to": "Kyrsten Sinema", "width": 1}, {"from": "Vladimir Putin", "to": "Gabriel Boric", "width": 1}, {"from": "Vladimir Putin", "to": "Sun Chunlan", "width": 1}, {"from": "Vladimir Putin", "to": "Christine Lagarde", "width": 1}, {"from": "Olaf Scholz", "to": "Samia Suluhu Hassan", "width": 1}, {"from": "Olaf Scholz", "to": "Kevin McCarthy", "width": 1}, {"from": "Olaf Scholz", "to": "Abiy Ahmed", "width": 1}, {"from": "Olaf Scholz", "to": "Kyrsten Sinema", "width": 1}, {"from": "Olaf Scholz", "to": "Gabriel Boric", "width": 1}, {"from": "Olaf Scholz", "to": "Sun Chunlan", "width": 1}, {"from": "Olaf Scholz", "to": "Christine Lagarde", "width": 1}, {"from": "Samia Suluhu Hassan", "to": "Kevin McCarthy", "width": 1}, {"from": "Samia Suluhu Hassan", "to": "Abiy Ahmed", "width": 1}, {"from": "Samia Suluhu Hassan", "to": "Kyrsten Sinema", "width": 1}, {"from": "Samia Suluhu Hassan", "to": "Gabriel Boric", "width": 1}, {"from": "Samia Suluhu Hassan", "to": "Sun Chunlan", "width": 1}, {"from": "Samia Suluhu Hassan", "to": "Christine Lagarde", "width": 1}, {"from": "Kevin McCarthy", "to": "Abiy Ahmed", "width": 1}, {"from": "Kevin McCarthy", "to": "Kyrsten Sinema", "width": 1}, {"from": "Kevin McCarthy", "to": "Gabriel Boric", "width": 1}, {"from": "Kevin McCarthy", "to": "Letitia James", "width": 1}, {"from": "Kevin McCarthy", "to": "Lynn Fitch", "width": 1}, {"from": "Kevin McCarthy", "to": "Sun Chunlan", "width": 1}, {"from": "Kevin McCarthy", "to": "Zendaya", "width": 1}, {"from": "Kevin McCarthy", "to": "Miranda Lambert", "width": 1}, {"from": "Kevin McCarthy", "to": "Timnit Gebru", "width": 1}, {"from": "Kevin McCarthy", "to": "Tim Cook", "width": 1}, {"from": "Kevin McCarthy", "to": "Oprah Winfrey", "width": 1}, {"from": "Kevin McCarthy", "to": "Christine Lagarde", "width": 1}, {"from": "Kevin McCarthy", "to": "Kris Jenner", "width": 1}, {"from": "Kevin McCarthy", "to": "Andy Jassy", "width": 1}, {"from": "Kevin McCarthy", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Kevin McCarthy", "to": "Elizabeth Alexander", "width": 1}, {"from": "Kevin McCarthy", "to": "David Zaslav", "width": 1}, {"from": "Karuna Nundy", "to": "Letitia James", "width": 1}, {"from": "Karuna Nundy", "to": "Lynn Fitch", "width": 1}, {"from": "Karuna Nundy", "to": "Umar Ata Bandial", "width": 1}, {"from": "Karuna Nundy", "to": "Bela Bajaria", "width": 1}, {"from": "Karuna Nundy", "to": "Gautam Adani", "width": 1}, {"from": "Abiy Ahmed", "to": "Kyrsten Sinema", "width": 1}, {"from": "Abiy Ahmed", "to": "Gabriel Boric", "width": 1}, {"from": "Abiy Ahmed", "to": "Sun Chunlan", "width": 1}, {"from": "Abiy Ahmed", "to": "Christine Lagarde", "width": 1}, {"from": "Kyrsten Sinema", "to": "Gabriel Boric", "width": 1}, {"from": "Kyrsten Sinema", "to": "Letitia James", "width": 1}, {"from": "Kyrsten Sinema", "to": "Lynn Fitch", "width": 1}, {"from": "Kyrsten Sinema", "to": "Sun Chunlan", "width": 1}, {"from": "Kyrsten Sinema", "to": "Zendaya", "width": 1}, {"from": "Kyrsten Sinema", "to": "Miranda Lambert", "width": 1}, {"from": "Kyrsten Sinema", "to": "Timnit Gebru", "width": 1}, {"from": "Kyrsten Sinema", "to": "Tim Cook", "width": 1}, {"from": "Kyrsten Sinema", "to": "Oprah Winfrey", "width": 1}, {"from": "Kyrsten Sinema", "to": "Christine Lagarde", "width": 1}, {"from": "Kyrsten Sinema", "to": "Kris Jenner", "width": 1}, {"from": "Kyrsten Sinema", "to": "Andy Jassy", "width": 1}, {"from": "Kyrsten Sinema", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Kyrsten Sinema", "to": "Elizabeth Alexander", "width": 1}, {"from": "Kyrsten Sinema", "to": "David Zaslav", "width": 1}, {"from": "Gabriel Boric", "to": "Sun Chunlan", "width": 1}, {"from": "Gabriel Boric", "to": "Christine Lagarde", "width": 1}, {"from": "Letitia James", "to": "Lynn Fitch", "width": 1}, {"from": "Letitia James", "to": "Umar Ata Bandial", "width": 1}, {"from": "Letitia James", "to": "Zendaya", "width": 1}, {"from": "Letitia James", "to": "Miranda Lambert", "width": 1}, {"from": "Letitia James", "to": "Timnit Gebru", "width": 1}, {"from": "Letitia James", "to": "Tim Cook", "width": 1}, {"from": "Letitia James", "to": "Oprah Winfrey", "width": 1}, {"from": "Letitia James", "to": "Kris Jenner", "width": 1}, {"from": "Letitia James", "to": "Andy Jassy", "width": 1}, {"from": "Letitia James", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Letitia James", "to": "Elizabeth Alexander", "width": 1}, {"from": "Letitia James", "to": "David Zaslav", "width": 1}, {"from": "Valeriy Zaluzhnyy", "to": "Sevgil Musaieva", "width": 1}, {"from": "Lynn Fitch", "to": "Umar Ata Bandial", "width": 1}, {"from": "Lynn Fitch", "to": "Zendaya", "width": 1}, {"from": "Lynn Fitch", "to": "Miranda Lambert", "width": 1}, {"from": "Lynn Fitch", "to": "Timnit Gebru", "width": 1}, {"from": "Lynn Fitch", "to": "Tim Cook", "width": 1}, {"from": "Lynn Fitch", "to": "Oprah Winfrey", "width": 1}, {"from": "Lynn Fitch", "to": "Kris Jenner", "width": 1}, {"from": "Lynn Fitch", "to": "Andy Jassy", "width": 1}, {"from": "Lynn Fitch", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Lynn Fitch", "to": "Elizabeth Alexander", "width": 1}, {"from": "Lynn Fitch", "to": "David Zaslav", "width": 1}, {"from": "Sun Chunlan", "to": "Christine Lagarde", "width": 1}, {"from": "Zendaya", "to": "Miranda Lambert", "width": 1}, {"from": "Zendaya", "to": "Timnit Gebru", "width": 1}, {"from": "Zendaya", "to": "Tim Cook", "width": 1}, {"from": "Zendaya", "to": "Oprah Winfrey", "width": 1}, {"from": "Zendaya", "to": "Michelle Yeoh", "width": 1}, {"from": "Zendaya", "to": "Kris Jenner", "width": 1}, {"from": "Zendaya", "to": "Andy Jassy", "width": 1}, {"from": "Zendaya", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Zendaya", "to": "Elizabeth Alexander", "width": 1}, {"from": "Zendaya", "to": "David Zaslav", "width": 1}, {"from": "Taika Waititi", "to": "Hwang Dong-hyuk", "width": 1}, {"from": "Miranda Lambert", "to": "Michelle Zauner", "width": 1}, {"from": "Miranda Lambert", "to": "Timnit Gebru", "width": 1}, {"from": "Miranda Lambert", "to": "Tim Cook", "width": 1}, {"from": "Miranda Lambert", "to": "Oprah Winfrey", "width": 1}, {"from": "Miranda Lambert", "to": "Kris Jenner", "width": 1}, {"from": "Miranda Lambert", "to": "Andy Jassy", "width": 1}, {"from": "Miranda Lambert", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Miranda Lambert", "to": "Elizabeth Alexander", "width": 1}, {"from": "Miranda Lambert", "to": "David Zaslav", "width": 1}, {"from": "Josh Wardle", "to": "Timnit Gebru", "width": 1}, {"from": "Josh Wardle", "to": "Mike Cannon-Brookes", "width": 1}, {"from": "Josh Wardle", "to": "Bela Bajaria", "width": 1}, {"from": "Josh Wardle", "to": "David V\u00e9lez", "width": 1}, {"from": "Josh Wardle", "to": "Gautam Adani", "width": 1}, {"from": "Josh Wardle", "to": "Andy Jassy", "width": 1}, {"from": "Josh Wardle", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Josh Wardle", "to": "David Zaslav", "width": 1}, {"from": "Michelle Zauner", "to": "Hwang Dong-hyuk", "width": 1}, {"from": "Timnit Gebru", "to": "Mike Cannon-Brookes", "width": 1}, {"from": "Timnit Gebru", "to": "Bela Bajaria", "width": 1}, {"from": "Timnit Gebru", "to": "David V\u00e9lez", "width": 1}, {"from": "Timnit Gebru", "to": "Tim Cook", "width": 1}, {"from": "Timnit Gebru", "to": "Oprah Winfrey", "width": 1}, {"from": "Timnit Gebru", "to": "Gautam Adani", "width": 1}, {"from": "Timnit Gebru", "to": "Kris Jenner", "width": 1}, {"from": "Timnit Gebru", "to": "Andy Jassy", "width": 1}, {"from": "Timnit Gebru", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Timnit Gebru", "to": "Elizabeth Alexander", "width": 1}, {"from": "Timnit Gebru", "to": "David Zaslav", "width": 1}, {"from": "Mike Cannon-Brookes", "to": "Bela Bajaria", "width": 1}, {"from": "Mike Cannon-Brookes", "to": "David V\u00e9lez", "width": 1}, {"from": "Mike Cannon-Brookes", "to": "Gautam Adani", "width": 1}, {"from": "Mike Cannon-Brookes", "to": "Andy Jassy", "width": 1}, {"from": "Mike Cannon-Brookes", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Mike Cannon-Brookes", "to": "David Zaslav", "width": 1}, {"from": "Bela Bajaria", "to": "David V\u00e9lez", "width": 1}, {"from": "Bela Bajaria", "to": "Gautam Adani", "width": 1}, {"from": "Bela Bajaria", "to": "Andy Jassy", "width": 1}, {"from": "Bela Bajaria", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Bela Bajaria", "to": "David Zaslav", "width": 1}, {"from": "David V\u00e9lez", "to": "Gautam Adani", "width": 1}, {"from": "David V\u00e9lez", "to": "Andy Jassy", "width": 1}, {"from": "David V\u00e9lez", "to": "Sam Bankman-Fried", "width": 1}, {"from": "David V\u00e9lez", "to": "David Zaslav", "width": 1}, {"from": "Tim Cook", "to": "Oprah Winfrey", "width": 1}, {"from": "Tim Cook", "to": "Kris Jenner", "width": 1}, {"from": "Tim Cook", "to": "Andy Jassy", "width": 1}, {"from": "Tim Cook", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Tim Cook", "to": "Elizabeth Alexander", "width": 1}, {"from": "Tim Cook", "to": "David Zaslav", "width": 1}, {"from": "Oprah Winfrey", "to": "Kris Jenner", "width": 1}, {"from": "Oprah Winfrey", "to": "Andy Jassy", "width": 1}, {"from": "Oprah Winfrey", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Oprah Winfrey", "to": "Elizabeth Alexander", "width": 1}, {"from": "Oprah Winfrey", "to": "David Zaslav", "width": 1}, {"from": "Gautam Adani", "to": "Andy Jassy", "width": 1}, {"from": "Gautam Adani", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Gautam Adani", "to": "David Zaslav", "width": 1}, {"from": "Kris Jenner", "to": "Andy Jassy", "width": 1}, {"from": "Kris Jenner", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Kris Jenner", "to": "Elizabeth Alexander", "width": 1}, {"from": "Kris Jenner", "to": "David Zaslav", "width": 1}, {"from": "Andy Jassy", "to": "Sam Bankman-Fried", "width": 1}, {"from": "Andy Jassy", "to": "Elizabeth Alexander", "width": 1}, {"from": "Andy Jassy", "to": "David Zaslav", "width": 1}, {"from": "Sally Rooney", "to": "Elizabeth Alexander", "width": 1}, {"from": "Sam Bankman-Fried", "to": "Elizabeth Alexander", "width": 1}, {"from": "Sam Bankman-Fried", "to": "David Zaslav", "width": 1}, {"from": "Elizabeth Alexander", "to": "David Zaslav", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "repulsion": {
+            "centralGravity": 0.2,
+            "damping": 0.09,
+            "nodeDistance": 100,
+            "springConstant": 0.05,
+            "springLength": 200
+        },
+        "solver": "repulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
