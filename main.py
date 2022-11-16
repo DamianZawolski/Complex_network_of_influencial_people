@@ -21,7 +21,6 @@ with open('osoby.txt', encoding='utf-8') as f:
         dane.append(osoba)
 
 # print(dane)
-
 for elem in dane:
     G.add_node(elem[0])
 
