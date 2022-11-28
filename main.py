@@ -124,9 +124,6 @@ class PDF(FPDF):
         im = Image.open(zdjecie)
         width, height = im.size
         max_width = 100
-        print(f"mx/w {max_width / width * 15}")
-        print(f"w {width * (max_width / width)}")
-
         self.set_xy(55.0, 30.0)
         self.image(zdjecie, link='', type='', w=width * (max_width / width), h=height * (max_width / width))
 
@@ -182,9 +179,8 @@ def create_pdf(name):
     pdf = PDF()
     pdf.add_page()
     pdf.lines()
-    image = f"D:\Python\Complex_network_of_influencial_people\images\{name}\Image_1.jpg"
+    image = f"images/{name}/Image_1.jpg"
     pdf.imagex(image)
-    print()
     pdf.titles(name)
     pdf.info(name, image)
     pdf.set_author('Damian Zawolski')
