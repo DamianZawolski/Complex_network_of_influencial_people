@@ -109,6 +109,10 @@ ilosc_maksymalnych_klik = nx.number_of_cliques(G)
 ilosc_maksymalnych_klik = dict(sorted(ilosc_maksymalnych_klik.items(), key=lambda item: item[1], reverse=True))
 print(ilosc_maksymalnych_klik)
 
+osoba = "Joe Biden"
+print(f"Osoba {osoba} i jej kliki")
+print(nx.cliques_containing_node(G)[osoba])
+
 class PDF(FPDF):
     def lines(self):
         self.rect(5.0, 5.0, 200.0,287.0)
@@ -116,7 +120,6 @@ class PDF(FPDF):
     def imagex(self, zdjecie):
         im = Image.open(zdjecie)
         width, height = im.size
-        print(width)
         max_width = 100
         print(f"mx/w {max_width/ width*15}")
         print(f"w {width*(max_width/ width)}")
@@ -129,15 +132,37 @@ class PDF(FPDF):
         self.set_font('Arial', 'B', 26)
         self.set_text_color(0, 0, 0)
         self.cell(w=210.0, h=40.0, align='C', txt=osoba, border=0)
+    def info(self, osoba, zdjecie):
+        im = Image.open(zdjecie)
+        width, height = im.size
+        max_width = 100
+        height = height * (max_width/ width)
+        text = ""
+        for e, elem in enumerate(nx.cliques_containing_node(G)[osoba]):
+            text += f"Klika {e+1}:\n"
+            for elems in elem:
+                text+="-"
+                text+= str(elems)
+                text +="\n"
+            text += "\n"
+
+        self.set_xy(10.0, height+40)
+        self.set_font('Arial', 'B', 12)
+        self.set_text_color(0, 0, 0)
+        self.multi_cell(w=190.0, h=20.0, align='C', txt=f"Kliki w których jest {osoba}", border=0)
+        self.multi_cell(w=190.0, h=12.0, align='C', txt=text, border=0)
+
 def create_pdf(name):
     downloader.download(name, limit=1, output_dir='images', adult_filter_off=True, force_replace=False, timeout=60, verbose=True)
     pdf = PDF()
     pdf.add_page()
     pdf.lines()
-    pdf.imagex(f"D:\Python\Complex_network_of_influencial_people\images\{name}\Image_1.jpg")
+    image = f"D:\Python\Complex_network_of_influencial_people\images\{name}\Image_1.jpg"
+    pdf.imagex(image)
     print()
     pdf.titles(name)
+    pdf.info(name, image)
     pdf.set_author('Damian Zawolski')
     pdf.output(f"{name}.pdf",'F')
 
-create_pdf("Joe Biden")
+create_pdf("Joe Rogan")
