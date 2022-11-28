@@ -1,6 +1,9 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from pyvis.network import Network
+from fpdf import FPDF
+from bing_image_downloader import downloader
+from PIL import Image
 
 G = nx.Graph()
 
@@ -95,3 +98,46 @@ for e in net.nodes:
                 e['zawod'] = "Niezdefiniowano"
 
 net.show("siec.html")
+
+print("Kliki")
+kliki = nx.find_cliques(G)
+for elem in kliki:
+    print(elem)
+
+print("\nOsoby i w ilu maksymalnych klikach się znajdują:")
+ilosc_maksymalnych_klik = nx.number_of_cliques(G)
+ilosc_maksymalnych_klik = dict(sorted(ilosc_maksymalnych_klik.items(), key=lambda item: item[1], reverse=True))
+print(ilosc_maksymalnych_klik)
+
+class PDF(FPDF):
+    def lines(self):
+        self.rect(5.0, 5.0, 200.0,287.0)
+
+    def imagex(self, zdjecie):
+        im = Image.open(zdjecie)
+        width, height = im.size
+        print(width)
+        max_width = 100
+        print(f"mx/w {max_width/ width*15}")
+        print(f"w {width*(max_width/ width)}")
+
+        self.set_xy(55.0, 30.0)
+        self.image(zdjecie, link='', type='', w=width*(max_width/ width), h=height * (max_width/ width))
+
+    def titles(self, osoba):
+        self.set_xy(0.0, 0.0)
+        self.set_font('Arial', 'B', 26)
+        self.set_text_color(0, 0, 0)
+        self.cell(w=210.0, h=40.0, align='C', txt=osoba, border=0)
+def create_pdf(name):
+    downloader.download(name, limit=1, output_dir='images', adult_filter_off=True, force_replace=False, timeout=60, verbose=True)
+    pdf = PDF()
+    pdf.add_page()
+    pdf.lines()
+    pdf.imagex(f"D:\Python\Complex_network_of_influencial_people\images\{name}\Image_1.jpg")
+    print()
+    pdf.titles(name)
+    pdf.set_author('Damian Zawolski')
+    pdf.output(f"{name}.pdf",'F')
+
+create_pdf("Joe Biden")
