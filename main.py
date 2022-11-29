@@ -107,18 +107,18 @@ kliki = nx.find_cliques(G)
 for elem in kliki:
     print(elem)
 
-#print("\nOsoby i w ilu maksymalnych klikach się znajdują:")
+# print("\nOsoby i w ilu maksymalnych klikach się znajdują:")
 ilosc_maksymalnych_klik = nx.number_of_cliques(G)
 ilosc_maksymalnych_klik = dict(sorted(ilosc_maksymalnych_klik.items(), key=lambda item: item[1], reverse=True))
-#print(ilosc_maksymalnych_klik)
+# print(ilosc_maksymalnych_klik)
 
 osoba = "Joe Biden"
-#print(f"Osoba {osoba} i jej kliki")
-#print(nx.cliques_containing_node(G)[osoba])
+# print(f"Osoba {osoba} i jej kliki")
+# print(nx.cliques_containing_node(G)[osoba])
 
 liczba_polaczen = dict(G.degree())
-#print(liczba_polaczen)
-#print(liczba_polaczen["Mia Mottley"])
+# print(liczba_polaczen)
+# print(liczba_polaczen["Mia Mottley"])
 maksymalna_liczba_polaczen = max(dict(G.degree()).items(), key=lambda x: x[1])[1]
 
 
@@ -133,8 +133,6 @@ class PDF(FPDF):
             flaga = flaga.replace("jpg", "png")
             im = Image.open(flaga.replace("jpg", "png"))
 
-
-
         width, height = im.size
         max_height = 10
         self.set_xy(190.0, 5.0)
@@ -145,7 +143,7 @@ class PDF(FPDF):
         width, height = im.size
         max_width = 100
         self.set_xy(55.0, 50.0)
-        self.image(zdjecie, link='', type='', w=width * (max_width / width), h=height * (max_width/ width))
+        self.image(zdjecie, link='', type='', w=width * (max_width / width), h=height * (max_width / width))
 
     def titles(self, osoba):
         for elem in dane:
@@ -210,13 +208,14 @@ class PDF(FPDF):
 def create_pdf(name):
     if not os.path.isfile(f"images/{name}/Image_1.jpg"):
         downloader.download(name, limit=1, output_dir='images', adult_filter_off=False, force_replace=False, timeout=60,
-                        verbose=True)
+                            verbose=True)
     for elem in dane:
         if elem[0] == name:
             kraj = elem[1]
     if not os.path.isfile(f"flags/{kraj} flaga/Image_1.jpg"):
-        downloader.download(f"{kraj} flaga", limit=1, output_dir='flags', adult_filter_off=False, force_replace=False, timeout=60,
-                        verbose=True)
+        downloader.download(f"{kraj} flaga", limit=1, output_dir='flags', adult_filter_off=False, force_replace=False,
+                            timeout=60,
+                            verbose=True)
     pdf = PDF()
     pdf.add_page()
     image = f"images/{name}/Image_1.jpg"
@@ -228,6 +227,7 @@ def create_pdf(name):
     pdf.set_author('Damian Zawolski')
     pdf.output(f"pdf/{name}.pdf")
     print(f"PDF {name} został utworzony")
+
 
 print(f"\n\n\n\n\n\n\n\n\n\n\n")
 for elem in osoby:
