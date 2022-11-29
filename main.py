@@ -1,4 +1,5 @@
 import itertools
+import os
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -106,26 +107,45 @@ kliki = nx.find_cliques(G)
 for elem in kliki:
     print(elem)
 
-print("\nOsoby i w ilu maksymalnych klikach się znajdują:")
+#print("\nOsoby i w ilu maksymalnych klikach się znajdują:")
 ilosc_maksymalnych_klik = nx.number_of_cliques(G)
 ilosc_maksymalnych_klik = dict(sorted(ilosc_maksymalnych_klik.items(), key=lambda item: item[1], reverse=True))
-print(ilosc_maksymalnych_klik)
+#print(ilosc_maksymalnych_klik)
 
 osoba = "Joe Biden"
-print(f"Osoba {osoba} i jej kliki")
-print(nx.cliques_containing_node(G)[osoba])
+#print(f"Osoba {osoba} i jej kliki")
+#print(nx.cliques_containing_node(G)[osoba])
+
+liczba_polaczen = dict(G.degree())
+#print(liczba_polaczen)
+#print(liczba_polaczen["Mia Mottley"])
+maksymalna_liczba_polaczen = max(dict(G.degree()).items(), key=lambda x: x[1])[1]
 
 
 class PDF(FPDF):
-    def lines(self):
-        self.rect(5.0, 5.0, 200.0, 287.0)
+    def flag(self, flaga):
+        if os.path.isfile(flaga):
+            im = Image.open(flaga)
+        elif os.path.isfile(flaga.replace("jpg", "gif")):
+            flaga = flaga.replace("jpg", "gif")
+            im = Image.open(flaga.replace("jpg", "gif"))
+        else:
+            flaga = flaga.replace("jpg", "png")
+            im = Image.open(flaga.replace("jpg", "png"))
+
+
+
+        width, height = im.size
+        max_height = 10
+        self.set_xy(190.0, 5.0)
+        self.image(flaga, link='', type='', w=width * (max_height / height), h=height * (max_height / height))
 
     def imagex(self, zdjecie):
         im = Image.open(zdjecie)
         width, height = im.size
         max_width = 100
-        self.set_xy(55.0, 30.0)
-        self.image(zdjecie, link='', type='', w=width * (max_width / width), h=height * (max_width / width))
+        self.set_xy(55.0, 50.0)
+        self.image(zdjecie, link='', type='', w=width * (max_width / width), h=height * (max_width/ width))
 
     def titles(self, osoba):
         for elem in dane:
@@ -137,8 +157,21 @@ class PDF(FPDF):
         self.set_text_color(0, 0, 0)
         self.multi_cell(w=210.0, h=20.0, align='C', txt=osoba, border=0)
         self.set_font('Arial', 'B', 12)
-        self.multi_cell(w=190.0, h=12.0, align='C', txt=f"Kraj pochodzenia: {kraj}     |     Profesja {profesja}",
+        self.multi_cell(w=190.0, h=12.0, align='C', txt=f"Kraj pochodzenia: {kraj}     |     Profesja: {profesja}",
                         border=0)
+        if ilosc_maksymalnych_klik[osoba] == 2:
+            kliki_info = f"Znajduje sie w dwoch klikach"
+        elif ilosc_maksymalnych_klik[osoba] == 1:
+            kliki_info = f"Znajduje sie w jednej klice"
+        else:
+            kliki_info = f"Znajduje sie w wiecej niz dwoch klikach"
+        self.multi_cell(w=190.0, h=6.0, align='C', txt=kliki_info,
+                        border=0)
+        self.multi_cell(w=190.0, h=6.0, align='C', txt=f"Ma {liczba_polaczen[osoba]} polaczen z innymi osobami",
+                        border=0)
+        if liczba_polaczen[osoba] == maksymalna_liczba_polaczen:
+            self.multi_cell(w=190.0, h=6.0, align='C', txt=f"(jest to maksymalna liczba polaczen)",
+                            border=0)
 
     def info(self, osoba, zdjecie):
         im = Image.open(zdjecie)
@@ -160,32 +193,43 @@ class PDF(FPDF):
             G_ex.add_nodes_from(elem)
             G_ex.add_edges_from(itertools.combinations(elem, 2))
             nx.spring_layout(G_ex)
-            nx.draw(G_ex, with_labels = True)
+            nx.draw(G_ex, with_labels=True)
             fig.set_size_inches(18.5, 10.5)
             plt.savefig(f"graphs\Graph{e}.png", format="png")
 
-        self.set_xy(10.0, height + 40)
+        self.set_xy(10.0, height + 50)
         self.set_font('Arial', 'B', 10)
         self.set_text_color(0, 0, 0)
         self.multi_cell(w=190.0, h=10.0, align='C', txt=f"Kliki w których jest {osoba}", border=0)
         self.image(f"graphs\Graph0.png", link='', type='', w=185, h=105)
         self.multi_cell(w=190.0, h=10.0, align='C', txt=text, border=0)
-        self.image(f"graphs\Graph1.png", link='', type='', w=185, h=105)
+        if ilosc_maksymalnych_klik[osoba] > 1:
+            self.image(f"graphs\Graph1.png", link='', type='', w=185, h=105)
 
 
 def create_pdf(name):
-    downloader.download(name, limit=1, output_dir='images', adult_filter_off=True, force_replace=False, timeout=60,
+    if not os.path.isfile(f"images/{name}/Image_1.jpg"):
+        downloader.download(name, limit=1, output_dir='images', adult_filter_off=False, force_replace=False, timeout=60,
+                        verbose=True)
+    for elem in dane:
+        if elem[0] == name:
+            kraj = elem[1]
+    if not os.path.isfile(f"flags/{kraj} flaga/Image_1.jpg"):
+        downloader.download(f"{kraj} flaga", limit=1, output_dir='flags', adult_filter_off=False, force_replace=False, timeout=60,
                         verbose=True)
     pdf = PDF()
     pdf.add_page()
-    pdf.lines()
     image = f"images/{name}/Image_1.jpg"
+    flag = f"flags/{kraj} flaga/Image_1.jpg"
+    pdf.flag(flag)
     pdf.imagex(image)
     pdf.titles(name)
     pdf.info(name, image)
     pdf.set_author('Damian Zawolski')
-    pdf.output(f"pdf/{name}.pdf", 'F')
+    pdf.output(f"pdf/{name}.pdf")
+    print(f"PDF {name} został utworzony")
 
-
+print(f"\n\n\n\n\n\n\n\n\n\n\n")
 for elem in osoby:
-    create_pdf(elem["imie"])
+    if not os.path.isfile(f"pdf/{elem['imie']}.pdf"):
+        create_pdf(elem["imie"])
